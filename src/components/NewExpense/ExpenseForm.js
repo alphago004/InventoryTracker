@@ -35,6 +35,20 @@ const ExpenseForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
 
+        if (!enteredTitle && !enteredAmount && !enteredDate) {
+            window.alert("Are you out of your mind?? Do you think I am a fool, HUH!!");
+            return;
+        } else if (!enteredTitle) {
+            window.alert("Please enter title");
+            return;
+        } else if (!enteredAmount) {
+            window.alert("Please enter amount");
+            return;
+        } else if (!enteredDate) {
+            window.alert("Please enter date");
+            return;
+        }
+
         const expenseDate = {
             title: enteredTitle,
             amount: enteredAmount,
