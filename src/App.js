@@ -39,11 +39,16 @@ const App = () => {
     },
   ];
 
+  const addExpenseHandler = (expense) => {
+    console.log('In App.js');
+    console.log(expense);
+  }
+
   return (
     <div>
-      <NewExpense />
+      <NewExpense onSubmitExpense = {addExpenseHandler}/>
       <Expenses items= {expenses}/>
-      <p>Number of children: <MyComponent /></p>
+      <MyComponent /> {/* This is a component to check the number of child component this component has. It is logged in a browser console only. For testing*/}
     </div>
   );
 }
