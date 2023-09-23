@@ -11,11 +11,20 @@ const Expenses = ({ items }) => {
     setFilteredYear(selectedYear);  
   };
 
+  const filteredExpenses = items.filter(expense => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  }); 
+
+  const totalAmount = Math.round(filteredExpenses.reduce((acc, expense) => acc + expense.amount, 0) * 10) / 10;
+
   return (
     <div>
     <Card className="expenses">
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}/>
-      {items.map((expense, id) => (
+      {filteredExpenses.length === 0 ? ( 
+      <p style={{color: "white"}}>No Expenses Found. </p> 
+      ): (  
+      filteredExpenses.map((expense) => (
         <ExpenseItem
           key={items.id} // It's often recommended to use a unique identifier for keys, not the index.
           expense={expense}
@@ -23,7 +32,9 @@ const Expenses = ({ items }) => {
           //amount = {expense.amount}
           //date = {expense.date}
         />
-      ))}
+      ))
+    )}
+      <div style={{color:"white"}}>Total Amount: ${totalAmount}</div>
     </Card>
     </div>
   );
